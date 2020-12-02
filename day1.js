@@ -200,10 +200,10 @@ const input = [
     1765,
     1572]
 
-const find2020Sum = (years) => {
+const TwoSum = (years, year = 2020) => {
     let yearMap = new Map()
     for (let i = 0; i < years.length; i++) {
-        let diff = 2020 - years[i]
+        let diff = year - years[i]
 
         if (yearMap.has(diff)) {
             return years[i] * diff
@@ -213,4 +213,23 @@ const find2020Sum = (years) => {
     }
 }
 
-console.log(find2020Sum(input))
+const threeSum = (years, year = 2020) => {
+    for (let i = 0; i < years.length; i++) {
+        for (let j = 0; j < years.length; j++) {
+            for (let k = 0; k < years.length; k++) {
+                if (years[i] + years[j] + years[k] === year) return years[i] * years[j] * years[k]
+            }
+        }
+    }
+}
+
+const short = [
+    1721,
+    979,
+    366,
+    299,
+    675,
+    1456
+]
+
+console.log(threeSum(input))
