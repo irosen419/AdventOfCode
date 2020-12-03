@@ -1008,7 +1008,7 @@ const test = [
     "2-9 c: ccccccccc",
 ]
 
-const validPassword = (passwords) => {
+const validFrequencyPassword = (passwords) => {
     let counter = 0
     for (let i = 0; i < passwords.length; i++) {
         let split = passwords[i].split(": ")
@@ -1026,4 +1026,24 @@ const validPassword = (passwords) => {
     return counter
 }
 
-console.log(validPassword(input))
+const validIndexPassword = (passwords) => {
+    let counter = 0
+    for (let i = 0; i < passwords.length; i++) {
+
+        let split = passwords[i].split(": ")
+        let frequency = split[0].split(" ")[0]
+        let letter = split[0].split(" ")[1]
+        let password = split[1]
+        let first = parseInt(frequency.split("-")[0])
+        let second = parseInt(frequency.split("-")[1])
+
+        if (!(password[first - 1] === letter && password[second - 1] === letter)
+            &&
+            (password[first - 1] === letter || password[second - 1] === letter)) {
+            counter++
+        }
+    }
+    return counter
+}
+
+console.log(validIndexPassword(input))
