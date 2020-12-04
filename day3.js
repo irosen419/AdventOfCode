@@ -338,16 +338,16 @@ const test = [
     ".#..#...#.#.#..#...#.#.#..#...#.#.#..#...#.#.#..#...#.#.#..#...#.#"
 ]
 
-const dontHitATree = (slope) => {
+const dontHitATree = (path) => {
     let counter = 0
     let i = 0
     let j = 0
-    let run = slope[i]
+    let run = path[i]
     while (run && run[j]) {
         j++
         if (j % 3 === 0) {
             i++
-            run = slope[i]
+            run = path[i]
             if (run && run[j] === "#") {
                 counter++
             }
@@ -356,4 +356,33 @@ const dontHitATree = (slope) => {
     return counter
 }
 
-console.log("Input: ", dontHitATree(input))
+const dontHitAnotherTree = (path, slopes) => {
+    // slopes.forEach(slope => {
+    //     console.log(Object.keys(slope))
+    //     console.log(Object.values(slope))
+    // })
+    let accumulator = 1
+    for (let k = 0; k < slopes.length; k++) {
+        let across = Object.keys(slopes[k])[0]
+        let down = Object.values(slopes[k])[0]
+
+        let counter = 0
+        let i = 0
+        let j = 0
+        let run = path[i]
+        while (run && run[j]) {
+            j++
+            if (j % across === 0) {
+                i += down
+                run = path[i]
+                if (run && run[j] === "#") {
+                    counter++
+                }
+            }
+        }
+        accumulator *= counter
+    }
+    return accumulator
+}
+
+console.log(dontHitAnotherTree(input, [{ 1: 1 }, { 3: 1 }, { 5: 1 }, { 7: 1 }, { 1: 2 }]))
